@@ -465,7 +465,8 @@ async function extractDataFromSteps(repoPath) {
       slug: slugify(sectionStep.title),
       lessons: [],
       order: sections.length + 1,
-      stepOrder: sectionStep.order
+      stepOrder: sectionStep.order,
+      readmeContent: sectionStep.readmeContent // Store the README content
     };
     sections.push(section);
   }
@@ -735,17 +736,29 @@ async function createSection(outputPath, section) {
   await fs.mkdir(lessonsPath, { recursive: true });
   
   // Create section metadata file
-  const sectionContent = `---
+  // Extract section content from README if available
+  let sectionDescription = section.title;
+  let sectionContent = '';
+  
+  if (section.readmeContent) {
+    // Remove the first heading (H1) from the README content
+    const readmeWithoutH1 = section.readmeContent.replace(/^#\s+.*\n/, '').trim();
+    if (readmeWithoutH1) {
+      sectionContent = readmeWithoutH1;
+    }
+  }
+  
+  const sectionMdx = `---
 slug: ${section.slug}
 title: ${section.title}
 order: ${section.order || 1}
-description: ${section.title}
+description: ${sectionDescription}
 ---
 
-This section covers ${section.title.toLowerCase()}.
+${sectionContent || `This section covers ${section.title.toLowerCase()}.`}
 `;
 
-  await fs.writeFile(path.join(sectionPath, `${section.slug}.mdx`), sectionContent);
+  await fs.writeFile(path.join(sectionPath, `${section.slug}.mdx`), sectionMdx);
   
   // Create lessons
   for (const lesson of section.lessons) {
