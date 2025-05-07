@@ -1,0 +1,36 @@
+{
+  "name": "gitorial-to-dotcodeschool",
+  "version": "1.0.0",
+  "description": "Convert a gitorial format course to Dot Code School MDX-based course format",
+  "main": "index.js",
+  "bin": {
+    "gitorial-to-dotcodeschool": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "./test.sh"
+  },
+  "keywords": [
+    "gitorial",
+    "dotcodeschool",
+    "mdx",
+    "course",
+    "converter"
+  ],
+  "author": "Dot Code School",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotcodeschool/gitorial-to-dotcodeschool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dotcodeschool/gitorial-to-dotcodeschool/issues"
+  },
+  "homepage": "https://github.com/dotcodeschool/gitorial-to-dotcodeschool#readme",
+  "dependencies": {
+    "commander": "^11.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
