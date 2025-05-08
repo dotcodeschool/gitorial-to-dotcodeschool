@@ -484,13 +484,14 @@ async function extractDataFromSteps(repoPath) {
   const solutionSteps = allSteps.filter(step => step.type === 'solution');
   const actionSteps = allSteps.filter(step => step.type === 'action');
   
-  // Match template and solution steps by title
+  // Match template and solution steps by step number sequence
   const templateSolutionPairs = [];
   
   for (const template of templateSteps) {
-    // Find matching solution by title
+    // Find matching solution by step number (solution should be template step number + 1)
+    const templateStepNumber = parseInt(template.dir);
     const matchingSolution = solutionSteps.find(solution => 
-      solution.title.trim() === template.title.trim()
+      parseInt(solution.dir) === templateStepNumber + 1
     );
     
     if (matchingSolution) {
