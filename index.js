@@ -607,8 +607,7 @@ async function getDirectoryContent(dirPath) {
         // Skip files we don't want to include
         if (
           entry.name.includes('gitorial_metadata.json') || 
-          entry.name.includes('.gitattributes') ||
-          entry.name === '.gitignore'
+          entry.name.includes('.gitattributes')
         ) {
           continue;
         }
