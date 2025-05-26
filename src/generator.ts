@@ -3,7 +3,7 @@ import * as path from 'path';
 import { GitorialData, Section, Lesson, CliOptions, LessonContent } from './types';
 
 // Generate the Dot Code School course structure
-export async function generateDotCodeSchoolCourse(gitorialData: GitorialData, options: CliOptions): Promise<void> {
+export async function generateDotCodeSchoolCourse(gitorialData: GitorialData, options: CliOptions, githubUrl: string): Promise<void> {
   console.log('Generating Dot Code School course structure...');
   
   const { sections } = gitorialData;
@@ -11,7 +11,7 @@ export async function generateDotCodeSchoolCourse(gitorialData: GitorialData, op
   const courseSlug = path.basename(outputPath);
   
   // 1. Create course metadata file
-  await createCourseMetadataFile(outputPath, courseSlug, options, sections);
+  await createCourseMetadataFile(outputPath, courseSlug, options, sections, githubUrl);
   
   // 2. Create sections and lessons
   for (const section of sections) {
@@ -26,7 +26,8 @@ async function createCourseMetadataFile(
   outputPath: string, 
   courseSlug: string, 
   options: CliOptions, 
-  sections: Section[]
+  sections: Section[],
+  githubUrl: string
 ): Promise<void> {
   console.log('Creating course metadata file...');
   
@@ -53,6 +54,7 @@ what_youll_learn: ${JSON.stringify(whatYoullLearn, null, 2)}
 estimated_time: ${Math.ceil(sections.length / 2)} # Estimated time to complete in hours
 last_updated: "${new Date().toISOString().split('T')[0]}" # Current date
 is_gitorial: true
+github_url: ${githubUrl} # Original gitorial repository URL
 ---
 
 # ${courseTitle}

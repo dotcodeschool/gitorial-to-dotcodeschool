@@ -103,4 +103,32 @@ export async function validateGitorialRepo(repoPath: string, branch: string): Pr
     }
     throw error;
   }
+}
+
+// Extract GitHub URL from git repository
+export function extractGitHubUrl(repoPath: string): string {
+  try {
+    // Try to get the remote origin URL
+    const remoteUrl = execSync('git remote get-url origin', { cwd: repoPath }).toString().trim();
+    
+    // Convert SSH URLs to HTTPS URLs
+    if (remoteUrl.startsWith('git@github.com:')) {
+      // Convert git@github.com:user/repo.git to https://github.com/user/repo
+      return remoteUrl
+        .replace('git@github.com:', 'https://github.com/')
+        .replace(/\.git$/, '');
+    }
+    
+    // If it's already an HTTPS URL, clean it up
+    if (remoteUrl.startsWith('https://github.com/')) {
+      return remoteUrl.replace(/\.git$/, '');
+    }
+    
+    // For other git hosting services, return as-is but clean up .git suffix
+    return remoteUrl.replace(/\.git$/, '');
+  } catch (error) {
+    // If we can't get the remote URL, return a placeholder
+    console.warn('Warning: Could not extract GitHub URL from repository. Using placeholder.');
+    return 'https://github.com/user/repository';
+  }
 } 

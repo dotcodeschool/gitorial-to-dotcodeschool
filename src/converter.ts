@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import { validateGitorialRepo } from './validator';
+import { validateGitorialRepo, extractGitHubUrl } from './validator';
 import { extractGitorialData } from './extractor';
 import { generateDotCodeSchoolCourse } from './generator';
 import { CliOptions } from './types';
@@ -13,14 +13,18 @@ export async function convertGitorialToDotCodeSchool(options: CliOptions): Promi
     // 1. Validate input repository
     await validateGitorialRepo(options.input, options.branch);
     
-    // 2. Create output directory structure
+    // 2. Extract GitHub URL from repository
+    const githubUrl = extractGitHubUrl(options.input);
+    console.log(`Detected GitHub URL: ${githubUrl}`);
+    
+    // 3. Create output directory structure
     await createOutputStructure(options.output);
     
-    // 3. Extract gitorial metadata and content
+    // 4. Extract gitorial metadata and content
     const gitorialData = await extractGitorialData(options.input, options.branch);
     
-    // 4. Generate Dot Code School course structure
-    await generateDotCodeSchoolCourse(gitorialData, options);
+    // 5. Generate Dot Code School course structure
+    await generateDotCodeSchoolCourse(gitorialData, options, githubUrl);
     
     console.log('Conversion completed successfully!');
   } catch (error) {

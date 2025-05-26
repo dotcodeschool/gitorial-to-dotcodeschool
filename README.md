@@ -215,11 +215,11 @@ output-directory/
         ├── section-slug.mdx  # Section metadata
         └── lessons/          # Container for all lessons in this section
             ├── lesson-1-slug/    # First lesson directory
-            │   ├── lesson-1-slug.mdx  # Lesson content
+            │   ├── lesson-1-slug.mdx  # Lesson content with commit hash
             │   └── files/        # Optional code files for the lesson
             │       └── source/   # OR template/ and solution/ pair
             └── lesson-2-slug/    # Second lesson directory
-                ├── lesson-2-slug.mdx  # Lesson content
+                ├── lesson-2-slug.mdx  # Lesson content with commit hash
                 └── files/        # Optional code files
                     ├── template/ # Files with TODOs for learners
                     └── solution/ # Completed files for reference
