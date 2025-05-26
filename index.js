@@ -707,6 +707,8 @@ prerequisites: []
 what_youll_learn: ${JSON.stringify(whatYoullLearn, null, 2)}
 estimated_time: ${Math.ceil(sections.length / 2)} # Estimated time to complete in hours
 last_updated: "${new Date().toISOString().split('T')[0]}" # Current date
+repo_url: ${repoUrl}
+is_gitorial: true
 ---
 
 # ${courseTitle}
