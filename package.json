@@ -2,13 +2,17 @@
   "name": "gitorial-to-dotcodeschool",
   "version": "1.0.0",
   "description": "Convert a gitorial format course to Dot Code School MDX-based course format",
-  "main": "index.js",
+  "main": "dist/cli.js",
   "bin": {
-    "gitorial-to-dotcodeschool": "./index.js"
+    "gitorial-to-dotcodeschool": "./dist/cli.js"
   },
   "scripts": {
-    "start": "node index.js",
-    "test": "./test.sh"
+    "build": "tsc",
+    "dev": "ts-node src/cli.ts",
+    "start": "npm run build && node dist/cli.js",
+    "test": "./test.sh",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "keywords": [
     "gitorial",
@@ -32,5 +36,10 @@
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

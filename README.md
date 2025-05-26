@@ -13,6 +13,38 @@ The conversion process:
 3. Creates appropriate MDX metadata files
 4. Sets up code files in the right format (source or template/solution)
 
+## Development
+
+This project is built with TypeScript for enhanced type safety and developer experience.
+
+### Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/dotcodeschool/gitorial-to-dotcodeschool.git
+cd gitorial-to-dotcodeschool
+
+# Install dependencies
+npm install
+
+# Run in development mode (uses ts-node)
+npm run dev -- --help
+
+# Build TypeScript to JavaScript
+npm run build
+
+# Run the built version
+npm start -- --help
+```
+
+### Available Scripts
+
+- `npm run build`: Compile TypeScript to JavaScript in the `dist/` directory
+- `npm run dev`: Run TypeScript directly with ts-node (for development)
+- `npm start`: Build and run the compiled JavaScript
+- `npm run clean`: Remove the `dist/` directory
+- `npm test`: Run the test suite
+
 ## Installation
 
 ### Local Installation
