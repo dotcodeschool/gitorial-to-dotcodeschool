@@ -1,0 +1,7 @@
+// Helper function to convert a string to a slug
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w ]+/g, '')
+    .replace(/ +/g, '-');
+} 
