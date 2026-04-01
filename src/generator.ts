@@ -200,8 +200,8 @@ async function writeFiles(
   files: LessonContent
 ): Promise<void> {
   for (const [filePath, content] of Object.entries(files)) {
-    // Skip README.md as we've already extracted its content
-    if (path.basename(filePath) === "README.md") {
+    // Skip README.md (content extracted separately) and readmeTitle (metadata, not a real file)
+    if (path.basename(filePath) === "README.md" || filePath === "readmeTitle") {
       continue;
     }
 
